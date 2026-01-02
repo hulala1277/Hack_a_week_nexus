@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Open cew.html",
+            "file": "c:\\Users\\A C E R\\OneDrive\\Documents\\GitHub\\Hack_a_week_nexus\\Hack-A-Week\\Pre-home-page-Back-up\\cew.html"
+        }
+    ]
+}
