@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Public Issues - JANASUNWAI 360</title>
+    <link rel="stylesheet" href="style-details.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-text">
+                    <h2 class="main-title">JANASUNWAI 360</h2>
+                    <p class="tagline">Voice of the People</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="First-Page.html" class="nav-link">Home</a>
+                <a href="view-all-issues.html" class="nav-link active">Public Issues</a>
+                <a href="view-responses.html" class="nav-link">Responses</a>
+                <a href="view-budget.html" class="nav-link">Budget</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="page-section">
+            <h1 class="page-title">All Public Issues</h1>
+            <p class="page-subtitle">Browse all reported issues and their status</p>
+
+            <!-- Search and Filter -->
+            <div class="search-filter">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search issues..."
+                >
+                <select id="statusFilter" class="status-filter">
+                    <option value="">All Status</option>
+                    <option value="Seen">Seen</option>
+                    <option value="In Review">In Review</option>
+                    <option value="Action Taken">Action Taken</option>
+                </select>
+            </div>
+
+            <!-- Issues List -->
+            <div id="issuesList" class="issues-list">
+                <div class="loading">Loading issues...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 JANASUNWAI 360. All rights reserved.</p>
+    </footer>
+
+    <script src="supabase.js"></script>
+    <script src="issues.js"></script>
+</body>
+</html>

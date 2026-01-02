@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Responses - JANASUNWAI 360</title>
+    <link rel="stylesheet" href="style-details.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-text">
+                    <h2 class="main-title">JANASUNWAI 360</h2>
+                    <p class="tagline">Voice of the People</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="First-Page.html" class="nav-link">Home</a>
+                <a href="view-all-issues.html" class="nav-link">Public Issues</a>
+                <a href="view-responses.html" class="nav-link active">Responses</a>
+                <a href="view-budget.html" class="nav-link">Budget</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="page-section">
+            <h1 class="page-title">Government Responses</h1>
+            <p class="page-subtitle">Track the status of all government responses to public issues</p>
+
+            <!-- Status Filter -->
+            <div class="search-filter">
+                <select id="responseFilter" class="status-filter">
+                    <option value="">All Status</option>
+                    <option value="Seen">Seen</option>
+                    <option value="In Review">In Review</option>
+                    <option value="Action Taken">Action Taken</option>
+                </select>
+            </div>
+
+            <!-- Responses List -->
+            <div id="responsesList" class="responses-list">
+                <div class="loading">Loading responses...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 JANASUNWAI 360. All rights reserved.</p>
+    </footer>
+
+    <script src="supabase.js"></script>
+    <script src="responses.js"></script>
+</body>
+</html>

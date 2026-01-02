@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker - JANASUNWAI 360</title>
+    <link rel="stylesheet" href="style-details.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-text">
+                    <h2 class="main-title">JANASUNWAI 360</h2>
+                    <p class="tagline">Voice of the People</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="First-Page.html" class="nav-link">Home</a>
+                <a href="view-all-issues.html" class="nav-link">Public Issues</a>
+                <a href="view-responses.html" class="nav-link">Responses</a>
+                <a href="view-budget.html" class="nav-link active">Budget</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="page-section">
+            <h1 class="page-title">Budget Tracker</h1>
+            <p class="page-subtitle">Track government spending and budget allocations</p>
+
+            <!-- Budget Categories -->
+            <div class="budget-summary">
+                <div class="summary-card">
+                    <h3>Total Budget</h3>
+                    <p class="summary-amount" id="totalBudget">NPR 0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Spent</h3>
+                    <p class="summary-amount" id="totalSpent">NPR 0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Remaining</h3>
+                    <p class="summary-amount" id="totalRemaining">NPR 0</p>
+                </div>
+            </div>
+
+            <!-- Budget Items List -->
+            <div id="budgetList" class="budget-list">
+                <div class="loading">Loading budget data...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 JANASUNWAI 360. All rights reserved.</p>
+    </footer>
+
+    <script src="supabase.js"></script>
+    <script src="budget.js"></script>
+</body>
+</html>
