@@ -1,4 +1,3 @@
-// Fetch and display government responses from Supabase
 let allResponses = [];
 
 async function loadResponses() {
@@ -6,7 +5,6 @@ async function loadResponses() {
         const responsesList = document.getElementById("responsesList");
         responsesList.innerHTML = '<div class="loading">Loading responses...</div>';
 
-        // Fetch from Supabase with error handling
         let responses = [];
         try {
             responses = await supabase.getAll("responses");
@@ -63,13 +61,9 @@ function displayResponses(responses) {
     });
 }
 
-// Status filter functionality
 document.getElementById("responseFilter").addEventListener("change", (e) => {
     const selectedStatus = e.target.value;
-    // Note: responses table doesn't have a status column
-    // This filter is kept for UI consistency but doesn't filter
     displayResponses(allResponses);
 });
 
-// Load responses on page load
 document.addEventListener("DOMContentLoaded", loadResponses);

@@ -1,10 +1,6 @@
-// Fetch and display all issues from Supabase
 let allIssues = [];
 
-// Helper function to capitalize category names
 function capitalizeCategory(category) {
-    // Just return the category as-is since it should already be capitalized
-    // from the database
     return category || 'Uncategorized';
 }
 
@@ -13,7 +9,6 @@ async function loadIssues() {
         const issuesList = document.getElementById("issuesList");
         issuesList.innerHTML = '<div class="loading">Loading issues...</div>';
 
-        // Fetch from Supabase with error handling
         let issues = [];
         try {
             issues = await supabase.getAll("issues");
@@ -53,7 +48,6 @@ function displayIssues(issues) {
         const createdDate = issue.created_at ? new Date(issue.created_at).toLocaleDateString() : "Unknown date";
         const location = `${issue.municipality || ""}, ${issue.district || ""}, ${issue.province || ""}`.replace(/^,|,$/g, "").trim();
         
-        // Format status for display
         const statusDisplay = issue.status ? issue.status.charAt(0).toUpperCase() + issue.status.slice(1) : "Open";
         
         issueCard.innerHTML = `
@@ -75,7 +69,6 @@ function displayIssues(issues) {
     });
 }
 
-// Search functionality
 document.getElementById("searchInput").addEventListener("input", (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const filtered = allIssues.filter(issue => 
@@ -86,7 +79,6 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
     displayIssues(filtered);
 });
 
-// Status filter functionality
 document.getElementById("statusFilter").addEventListener("change", (e) => {
     const selectedStatus = e.target.value;
     const filtered = selectedStatus 
@@ -95,5 +87,4 @@ document.getElementById("statusFilter").addEventListener("change", (e) => {
     displayIssues(filtered);
 });
 
-// Load issues on page load
 document.addEventListener("DOMContentLoaded", loadIssues);
