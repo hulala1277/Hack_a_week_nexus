@@ -31,20 +31,22 @@ form.addEventListener("submit", async (e) => {
     submitBtn.innerHTML = '<span>Submitting...</span>';
 
     try {
-        // Collect form data
+        // Collect form data - matching the actual database schema
         const issueData = {
             title: document.getElementById("title").value.trim(),
             description: document.getElementById("description").value.trim(),
-            location: document.getElementById("location").value.trim(),
-            category: document.getElementById("category").value,
-            impact_level: document.getElementById("impact").value,
-            status: "Pending", // Initial status
-            votes: 0, // Initial vote count
+            category: document.getElementById("category").value.trim() || "Other",
+            province: document.getElementById("province").value.trim(),
+            district: document.getElementById("district").value.trim(),
+            municipality: document.getElementById("municipality").value.trim(),
+            status: "open", // Use 'open' instead of 'Pending' - matches database constraint
             created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
         };
 
-        // Validate data
-        if (!issueData.title || !issueData.description || !issueData.location || !issueData.category || !issueData.impact_level) {
+        console.log("DEBUG: Submitting issue data:", JSON.stringify(issueData, null, 2));
+        if (!issueData.title || !issueData.description || !issueData.category || 
+            !issueData.province || !issueData.district || !issueData.municipality) {
             throw new Error("Please fill in all required fields.");
         }
 
@@ -56,6 +58,8 @@ form.addEventListener("submit", async (e) => {
             throw new Error("Description must be at least 20 characters long.");
         }
 
+        console.log("Submitting issue data:", issueData);
+
         // Insert into Supabase
         let response;
         try {
@@ -64,6 +68,8 @@ form.addEventListener("submit", async (e) => {
             console.error("Supabase Error:", supabaseError);
             throw new Error(`Failed to submit issue: ${supabaseError.message}`);
         }
+
+        console.log("Response from Supabase:", response);
 
         if (response && Array.isArray(response) && response.length > 0) {
             // Success
