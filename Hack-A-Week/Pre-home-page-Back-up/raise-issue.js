@@ -19,6 +19,13 @@ form.addEventListener("submit", async (e) => {
     successMessage.style.display = "none";
     errorMessage.style.display = "none";
 
+    // Validate form
+    if (!form.checkValidity()) {
+        errorText.textContent = "Please fill in all required fields correctly.";
+        errorMessage.style.display = "flex";
+        return;
+    }
+
     // Show loading state
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span>Submitting...</span>';
@@ -41,10 +48,24 @@ form.addEventListener("submit", async (e) => {
             throw new Error("Please fill in all required fields.");
         }
 
-        // Insert into Supabase
-        const response = await supabase.insert("issues", issueData);
+        if (issueData.title.length < 5) {
+            throw new Error("Issue title must be at least 5 characters long.");
+        }
 
-        if (response && response.length > 0) {
+        if (issueData.description.length < 20) {
+            throw new Error("Description must be at least 20 characters long.");
+        }
+
+        // Insert into Supabase
+        let response;
+        try {
+            response = await supabase.insert("issues", issueData);
+        } catch (supabaseError) {
+            console.error("Supabase Error:", supabaseError);
+            throw new Error(`Failed to submit issue: ${supabaseError.message}`);
+        }
+
+        if (response && Array.isArray(response) && response.length > 0) {
             // Success
             successMessage.style.display = "flex";
             form.reset();
@@ -58,7 +79,7 @@ form.addEventListener("submit", async (e) => {
                 window.location.href = "First-Page.html";
             }, 3000);
         } else {
-            throw new Error("Failed to submit issue. Please try again.");
+            throw new Error("Failed to submit issue. Please ensure your Supabase 'issues' table is properly configured.");
         }
     } catch (error) {
         console.error("Form submission error:", error);

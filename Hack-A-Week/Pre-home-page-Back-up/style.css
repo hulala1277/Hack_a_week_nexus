@@ -150,9 +150,8 @@ body {
     opacity: 0.9;
 }
 
-.cta-button {
+.issue_raise{
     display: block;
-    margin: 0 auto;
     background-color: #ffd700;
     color: #003d99;
     border: none;
@@ -164,7 +163,7 @@ body {
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.cta-button:hover {
+.issue_raise:hover {
     background-color: #ffed4e;
     transform: translateY(-2px);
 }

@@ -6,22 +6,29 @@ async function loadBudgetData() {
         const budgetList = document.getElementById("budgetList");
         budgetList.innerHTML = '<div class="loading">Loading budget data...</div>';
 
-        // Fetch from Supabase
-        const budgets = await supabase.getAll("budgets");
-        allBudgets = budgets;
+        // Fetch from Supabase with error handling
+        let budgets = [];
+        try {
+            budgets = await supabase.getAll("budgets");
+        } catch (fetchError) {
+            console.error("Error details:", fetchError);
+            throw new Error(`Failed to load budget data: ${fetchError.message}`);
+        }
 
-        if (budgets.length === 0) {
+        allBudgets = Array.isArray(budgets) ? budgets : [];
+
+        if (allBudgets.length === 0) {
             budgetList.innerHTML = '<div class="no-data">No budget data available.</div>';
             updateSummary([]);
             return;
         }
 
-        displayBudgets(budgets);
-        updateSummary(budgets);
+        displayBudgets(allBudgets);
+        updateSummary(allBudgets);
     } catch (error) {
         console.error("Error loading budget data:", error);
         document.getElementById("budgetList").innerHTML = 
-            '<div class="error">Failed to load budget data. Please try again later.</div>';
+            `<div class="error">⚠️ ${error.message}<br><small>Make sure your Supabase table "budgets" exists and is accessible.</small></div>`;
     }
 }
 
@@ -29,14 +36,14 @@ function displayBudgets(budgets) {
     const budgetList = document.getElementById("budgetList");
     budgetList.innerHTML = '';
 
-    if (budgets.length === 0) {
+    if (!budgets || budgets.length === 0) {
         budgetList.innerHTML = '<div class="no-data">No budget items found.</div>';
         return;
     }
 
     budgets.forEach(budget => {
-        const spent = budget.amount_spent || 0;
-        const allocated = budget.amount_allocated || 0;
+        const spent = parseFloat(budget.amount_spent) || 0;
+        const allocated = parseFloat(budget.amount_allocated) || 0;
         const percentage = allocated > 0 ? ((spent / allocated) * 100).toFixed(1) : 0;
 
         const budgetCard = document.createElement("div");
@@ -50,11 +57,11 @@ function displayBudgets(budgets) {
             <div class="budget-details">
                 <div class="budget-detail">
                     <span class="label">Allocated:</span>
-                    <span class="amount">NPR ${(allocated).toLocaleString()}</span>
+                    <span class="amount">NPR ${allocated.toLocaleString()}</span>
                 </div>
                 <div class="budget-detail">
                     <span class="label">Spent:</span>
-                    <span class="amount spent">NPR ${(spent).toLocaleString()}</span>
+                    <span class="amount spent">NPR ${spent.toLocaleString()}</span>
                 </div>
                 <div class="budget-detail">
                     <span class="label">Remaining:</span>
@@ -79,8 +86,8 @@ function updateSummary(budgets) {
     let totalSpent = 0;
 
     budgets.forEach(budget => {
-        totalBudget += budget.amount_allocated || 0;
-        totalSpent += budget.amount_spent || 0;
+        totalBudget += parseFloat(budget.amount_allocated) || 0;
+        totalSpent += parseFloat(budget.amount_spent) || 0;
     });
 
     document.getElementById("totalBudget").textContent = `NPR ${totalBudget.toLocaleString()}`;

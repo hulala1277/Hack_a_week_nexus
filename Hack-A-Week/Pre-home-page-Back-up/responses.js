@@ -6,20 +6,27 @@ async function loadResponses() {
         const responsesList = document.getElementById("responsesList");
         responsesList.innerHTML = '<div class="loading">Loading responses...</div>';
 
-        // Fetch from Supabase
-        const responses = await supabase.getAll("responses");
-        allResponses = responses;
+        // Fetch from Supabase with error handling
+        let responses = [];
+        try {
+            responses = await supabase.getAll("responses");
+        } catch (fetchError) {
+            console.error("Error details:", fetchError);
+            throw new Error(`Failed to load responses: ${fetchError.message}`);
+        }
 
-        if (responses.length === 0) {
+        allResponses = Array.isArray(responses) ? responses : [];
+
+        if (allResponses.length === 0) {
             responsesList.innerHTML = '<div class="no-data">No responses yet. Check back soon!</div>';
             return;
         }
 
-        displayResponses(responses);
+        displayResponses(allResponses);
     } catch (error) {
         console.error("Error loading responses:", error);
         document.getElementById("responsesList").innerHTML = 
-            '<div class="error">Failed to load responses. Please try again later.</div>';
+            `<div class="error">⚠️ ${error.message}<br><small>Make sure your Supabase table "responses" exists and is accessible.</small></div>`;
     }
 }
 
@@ -27,7 +34,7 @@ function displayResponses(responses) {
     const responsesList = document.getElementById("responsesList");
     responsesList.innerHTML = '';
 
-    if (responses.length === 0) {
+    if (!responses || responses.length === 0) {
         responsesList.innerHTML = '<div class="no-data">No responses match your filters.</div>';
         return;
     }
@@ -40,7 +47,10 @@ function displayResponses(responses) {
         };
 
         const responseCard = document.createElement("div");
-        responseCard.className = `response-card status-${response.status?.toLowerCase().replace(" ", "-") || "pending"}`;
+        responseCard.className = `response-card status-${(response.status || "pending").toLowerCase().replace(" ", "-")}`;
+        
+        const responseDate = response.response_date || response.created_at;
+        const formattedDate = responseDate ? new Date(responseDate).toLocaleDateString() : "Unknown date";
         
         responseCard.innerHTML = `
             <div class="response-header">
@@ -52,7 +62,7 @@ function displayResponses(responses) {
             <p class="response-body">${response.response_text || "No response details available"}</p>
             <div class="response-footer">
                 <span class="response-department">🏛️ ${response.department || "Government Department"}</span>
-                <span class="response-date">${new Date(response.response_date || response.created_at).toLocaleDateString()}</span>
+                <span class="response-date">${formattedDate}</span>
             </div>
         `;
 
