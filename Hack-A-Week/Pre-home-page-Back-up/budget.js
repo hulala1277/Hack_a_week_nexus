@@ -42,17 +42,21 @@ function displayBudgets(budgets) {
     }
 
     budgets.forEach(budget => {
-        const spent = parseFloat(budget.amount_spent) || 0;
-        const allocated = parseFloat(budget.amount_allocated) || 0;
+        const spent = parseFloat(budget.spent_amount) || 0;
+        const allocated = parseFloat(budget.allocated_amount) || 0;
         const percentage = allocated > 0 ? ((spent / allocated) * 100).toFixed(1) : 0;
+        const location = `${budget.municipality || ""}, ${budget.district || ""}, ${budget.province || ""}`.replace(/^,|,$/g, "").trim();
 
         const budgetCard = document.createElement("div");
         budgetCard.className = "budget-card";
         
         budgetCard.innerHTML = `
             <div class="budget-item-header">
-                <h3 class="budget-category">${budget.category || "Budget Item"}</h3>
-                <span class="budget-department">${budget.department || "Department"}</span>
+                <h3 class="budget-category">${budget.sector || "Budget Item"}</h3>
+                <span class="budget-department">${budget.fiscal_year || "FY"}</span>
+            </div>
+            <div class="budget-location">
+                📍 ${location || "All Locations"}
             </div>
             <div class="budget-details">
                 <div class="budget-detail">
@@ -74,7 +78,6 @@ function displayBudgets(budgets) {
                 </div>
                 <span class="progress-text">${percentage}% spent</span>
             </div>
-            <p class="budget-description">${budget.description || "No description"}</p>
         `;
 
         budgetList.appendChild(budgetCard);
@@ -86,8 +89,8 @@ function updateSummary(budgets) {
     let totalSpent = 0;
 
     budgets.forEach(budget => {
-        totalBudget += parseFloat(budget.amount_allocated) || 0;
-        totalSpent += parseFloat(budget.amount_spent) || 0;
+        totalBudget += parseFloat(budget.allocated_amount) || 0;
+        totalSpent += parseFloat(budget.spent_amount) || 0;
     });
 
     document.getElementById("totalBudget").textContent = `NPR ${totalBudget.toLocaleString()}`;

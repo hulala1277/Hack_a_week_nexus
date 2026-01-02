@@ -40,28 +40,21 @@ function displayResponses(responses) {
     }
 
     responses.forEach(response => {
-        const statusColor = {
-            'Seen': '#1e90ff',
-            'In Review': '#ff6b6b',
-            'Action Taken': '#2ecc71'
-        };
-
         const responseCard = document.createElement("div");
-        responseCard.className = `response-card status-${(response.status || "pending").toLowerCase().replace(" ", "-")}`;
+        responseCard.className = `response-card`;
         
-        const responseDate = response.response_date || response.created_at;
+        const responseDate = response.created_at;
         const formattedDate = responseDate ? new Date(responseDate).toLocaleDateString() : "Unknown date";
         
         responseCard.innerHTML = `
             <div class="response-header">
-                <div class="response-status-badge" style="background-color: ${statusColor[response.status] || '#999'}">
-                    ${response.status || "Pending"}
+                <div class="response-status-badge">
+                    Response to Issue #${response.issue_id || "Unknown"}
                 </div>
-                <h3 class="response-title">${response.issue_title || "Issue Response"}</h3>
             </div>
-            <p class="response-body">${response.response_text || "No response details available"}</p>
+            <p class="response-body">${response.message || "No response details available"}</p>
             <div class="response-footer">
-                <span class="response-department">🏛️ ${response.department || "Government Department"}</span>
+                <span class="response-official">👤 Official ID: ${response.official_id || "Unknown"}</span>
                 <span class="response-date">${formattedDate}</span>
             </div>
         `;
@@ -73,10 +66,9 @@ function displayResponses(responses) {
 // Status filter functionality
 document.getElementById("responseFilter").addEventListener("change", (e) => {
     const selectedStatus = e.target.value;
-    const filtered = selectedStatus 
-        ? allResponses.filter(response => response.status === selectedStatus)
-        : allResponses;
-    displayResponses(filtered);
+    // Note: responses table doesn't have a status column
+    // This filter is kept for UI consistency but doesn't filter
+    displayResponses(allResponses);
 });
 
 // Load responses on page load

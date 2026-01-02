@@ -1,6 +1,13 @@
 // Fetch and display all issues from Supabase
 let allIssues = [];
 
+// Helper function to capitalize category names
+function capitalizeCategory(category) {
+    // Just return the category as-is since it should already be capitalized
+    // from the database
+    return category || 'Uncategorized';
+}
+
 async function loadIssues() {
     try {
         const issuesList = document.getElementById("issuesList");
@@ -41,22 +48,26 @@ function displayIssues(issues) {
 
     issues.forEach(issue => {
         const issueCard = document.createElement("div");
-        issueCard.className = `issue-card status-${(issue.status || "pending").toLowerCase().replace(" ", "-")}`;
+        issueCard.className = `issue-card status-${(issue.status || "open").toLowerCase().replace(" ", "-")}`;
         
         const createdDate = issue.created_at ? new Date(issue.created_at).toLocaleDateString() : "Unknown date";
+        const location = `${issue.municipality || ""}, ${issue.district || ""}, ${issue.province || ""}`.replace(/^,|,$/g, "").trim();
+        
+        // Format status for display
+        const statusDisplay = issue.status ? issue.status.charAt(0).toUpperCase() + issue.status.slice(1) : "Open";
         
         issueCard.innerHTML = `
             <div class="issue-header">
                 <h3 class="issue-title">${issue.title || "Untitled Issue"}</h3>
-                <span class="issue-status">${issue.status || "Pending"}</span>
+                <span class="issue-status">${statusDisplay}</span>
             </div>
             <p class="issue-description">${issue.description || "No description provided"}</p>
             <div class="issue-footer">
-                <span class="issue-location">📍 ${issue.location || "Location not specified"}</span>
+                <span class="issue-location">📍 ${location || "Location not specified"}</span>
                 <span class="issue-date">${createdDate}</span>
             </div>
-            <div class="issue-votes">
-                <span class="votes-count">👍 ${issue.votes || 0} support</span>
+            <div class="issue-category">
+                <span class="category-tag">🏷️ ${capitalizeCategory(issue.category) || "Uncategorized"}</span>
             </div>
         `;
 

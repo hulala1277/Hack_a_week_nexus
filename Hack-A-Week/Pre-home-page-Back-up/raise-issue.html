@@ -69,30 +69,57 @@
                     <label for="category" class="form-label">Category <span class="required">*</span></label>
                     <select id="category" name="category" class="form-select" required>
                         <option value="">Select a category</option>
-                        <option value="Infrastructure">Infrastructure (Roads, Bridges, etc.)</option>
-                        <option value="Public Health">Public Health</option>
+                        <option value="Infrastructure">Infrastructure</option>
+                        <option value="Health">Health</option>
                         <option value="Education">Education</option>
-                        <option value="Water Supply">Water Supply</option>
+                        <option value="Water">Water</option>
                         <option value="Electricity">Electricity</option>
-                        <option value="Safety">Safety & Security</option>
                         <option value="Sanitation">Sanitation</option>
+                        <option value="Safety">Safety</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
 
-                <!-- Location -->
+                <!-- Province -->
                 <div class="form-group">
-                    <label for="location" class="form-label">Location <span class="required">*</span></label>
+                    <label for="province" class="form-label">Province <span class="required">*</span></label>
                     <input 
                         type="text" 
-                        id="location" 
-                        name="location" 
+                        id="province" 
+                        name="province" 
                         class="form-input"
-                        placeholder="e.g., Pokhara, Main Street"
+                        placeholder="e.g., Bagmati"
                         required
-                        maxlength="200"
+                        maxlength="100"
                     >
-                    <small class="form-hint">Where is the issue located?</small>
+                </div>
+
+                <!-- District -->
+                <div class="form-group">
+                    <label for="district" class="form-label">District <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="district" 
+                        name="district" 
+                        class="form-input"
+                        placeholder="e.g., Kathmandu"
+                        required
+                        maxlength="100"
+                    >
+                </div>
+
+                <!-- Municipality -->
+                <div class="form-group">
+                    <label for="municipality" class="form-label">Municipality <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="municipality" 
+                        name="municipality" 
+                        class="form-input"
+                        placeholder="e.g., Kathmandu Metropolitan City"
+                        required
+                        maxlength="100"
+                    >
                 </div>
 
                 <!-- Description -->
@@ -112,13 +139,14 @@
 
                 <!-- Impact Level -->
                 <div class="form-group">
-                    <label for="impact" class="form-label">Impact Level <span class="required">*</span></label>
-                    <select id="impact" name="impact" class="form-select" required>
-                        <option value="">Select impact level</option>
+                    <label for="impact" class="form-label">Impact Level</label>
+                    <select id="impact" name="impact" class="form-select">
+                        <option value="">Select impact level (optional)</option>
                         <option value="Low">Low (Affects a few people)</option>
                         <option value="Medium">Medium (Affects a neighborhood)</option>
                         <option value="High">High (Affects the entire community)</option>
                     </select>
+                    <small class="form-hint">This helps prioritize the issue</small>
                 </div>
 
                 <!-- Attachments (Optional) -->
