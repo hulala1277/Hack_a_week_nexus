@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JANASUNWAI 360 - Voice of the People</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css files/style.css">
+    <link rel="stylesheet" href="../css files/style-details.css">
+    <link rel="stylesheet" href="../css files/style-form.css">
+    <link rel="stylesheet" href="../css files/style1.css">
+    <link rel="stylesheet" href="../css files/style2.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header-container">
             <div class="logo-section">
+                <img src="logo.png" alt="JANASUNWAI 360" class="logo">
                 <div class="logo-text">
                     <h2 class="main-title">JANASUNWAI 360</h2>
                     <p class="tagline">Voice of the People</p>
                 </div>
             </div>
             <nav class="nav">
-                <a href="view-all-issues.html" class="nav-link">Public Issues</a>
-                <a href="view-budget.html" class="nav-link">Budget Tracker</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="Log-in.html" class="nav-link">Govt. Login</a>
+                <a href="First-Page.html" class="nav-link" data-i18n="nav-home">Home</a>
+                <a href="view-all-issues.html" class="nav-link active" data-i18n="nav-public-issues">Public Issues</a>
+                <a href="view-responses.html" class="nav-link" data-i18n="nav-responses">Responses</a>
+                <a href="view-budget.html" class="nav-link" data-i18n="nav-budget">Budget</a>
             </nav>
             <div class="language-toggle">
                 <span class="lang-active">नेपाली</span>
@@ -30,42 +35,50 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">JANASUNWAI 360</h1>
-            <p class="hero-subtitle">Speak Up Anonymously. Track Government Actions Transparently.</p>
+            <h1 class="hero-title" data-i18n="hero-title">JANASUNWAI 360</h1>
+            <p class="hero-subtitle" data-i18n="hero-subtitle">Speak Up Anonymously. Track Government Actions Transparently.</p>
             
             <div class="features-grid">
                 <div class="feature">
                     <div class="feature-icon">💬</div>
-                    <h3>Submit Your Concerns</h3>
-                    <p>Send suggestions or complaints anonymously.</p>
+                    <h3 data-i18n="feature-title-1">Submit Your Concerns</h3>
+                    <p data-i18n="feature-desc-1">Send suggestions or complaints anonymously.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">👁️</div>
-                    <h3>See Gov't Responses</h3>
-                    <p>Track progress and official replies.</p>
+                    <h3 data-i18n="feature-title-2">See Gov't Responses</h3>
+                    <p data-i18n="feature-desc-2">Track progress and official replies.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">💰</div>
-                    <h3>Follow the Budget</h3>
-                    <p>Check where public funds are spent.</p>
+                    <h3 data-i18n="feature-title-3">Follow the Budget</h3>
+                    <p data-i18n="feature-desc-3">Check where public funds are spent.</p>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+            
 
             <a href="raise-issue.html" class="cta-button">RAISE YOUR ISSUE ANONYMOUSLY ></a>
         </div>
         <div class="hero-image">
-            <!-- Placeholder for illustration -->
             <img src="diwash ko kam.jpg" alt="City illustration" class="city-image">
         </div>
     </section>
 
-    <!-- Cards Section -->
     <section class="cards-section">
         <div class="cards-container">
-            <!-- Recent Public Issues -->
             <div class="card">
                 <h3 class="card-title">Recent Public Issues</h3>
                 <ul class="card-list">
@@ -76,7 +89,6 @@
                 <button class="card-button" onclick="location.href='view-all-issues.html'">VIEW ALL ISSUES ></button>
             </div>
 
-            <!-- Government Responses -->
             <div class="card">
                 <h3 class="card-title">Government Responses</h3>
                 <div class="response-item">
@@ -114,28 +126,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <h2>About JANASUNWAI 360</h2>
-            <p>JANASUNWAI 360 is a platform that bridges the gap between citizens and government, enabling anonymous feedback, transparent tracking of public issues, and real-time budget monitoring. Our mission is to foster accountability and improve governance through technology.</p>
-            <div class="about-features">
-                <div class="about-feature">
-                    <h3>Anonymous Reporting</h3>
-                    <p>Submit concerns without fear of reprisal.</p>
-                </div>
-                <div class="about-feature">
-                    <h3>Transparent Tracking</h3>
-                    <p>Monitor the status of your submissions in real-time.</p>
-                </div>
-                <div class="about-feature">
-                    <h3>Budget Oversight</h3>
-                    <p>Keep track of public fund allocation and spending.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Trust Section -->
     <section class="trust-section">
         <h2>Building Trust Between Citizens & Government Institutions</h2>
@@ -155,5 +145,13 @@
         </div>
     </section>
 
+    <script src="../js files/supabaseClient.js"></script>
+    <script src="../js files/supabase.js"></script>
+    <script src="../js files/language.js"></script>
+    <script src="../js files/issues.js"></script>
+    <script src="../js files/raise-issue.js"></script>
+    <script src="../js files/responses.js"></script>
+    <script src="../js files/budget.js"></script>
+    <script src="../js files/govt-auth.js"></script>
 </body>
 </html>

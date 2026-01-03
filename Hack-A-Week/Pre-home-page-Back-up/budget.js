@@ -1,4 +1,3 @@
-// Fetch and display budget data from Supabase
 let allBudgets = [];
 
 async function loadBudgetData() {
@@ -6,7 +5,6 @@ async function loadBudgetData() {
         const budgetList = document.getElementById("budgetList");
         budgetList.innerHTML = '<div class="loading">Loading budget data...</div>';
 
-        // Fetch from Supabase with error handling
         let budgets = [];
         try {
             budgets = await supabase.getAll("budgets");
@@ -98,5 +96,4 @@ function updateSummary(budgets) {
     document.getElementById("totalRemaining").textContent = `NPR ${(totalBudget - totalSpent).toLocaleString()}`;
 }
 
-// Load budget data on page load
 document.addEventListener("DOMContentLoaded", loadBudgetData);

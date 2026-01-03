@@ -33,6 +33,11 @@ class SupabaseClient {
             console.log(`Making ${method} request to: ${url}`);
             console.log(`Request data:`, data);
 
+            // Ask Supabase to return the inserted representation for POSTs
+            if (method === 'POST') {
+                headers['Prefer'] = 'return=representation';
+            }
+
             const response = await fetch(url, {
                 method,
                 headers,
@@ -56,7 +61,23 @@ class SupabaseClient {
                 throw new Error(`Supabase Error (${response.status}): ${errorBody || response.statusText}`);
             }
 
-            const responseData = await response.json();
+            // Some responses (e.g., 204 No Content) have empty bodies.
+            // Use response.text() and parse only when content exists to avoid
+            // "Unexpected end of JSON input" errors when calling response.json().
+            const text = await response.text();
+            if (!text) {
+                console.log(`Empty response body from ${table} (status ${response.status})`);
+                return method === 'GET' ? [] : null;
+            }
+
+            let responseData;
+            try {
+                responseData = JSON.parse(text);
+            } catch (parseErr) {
+                console.warn(`Could not parse JSON response from ${table}:`, parseErr);
+                return text;
+            }
+
             console.log(`Response from ${table}:`, responseData);
             return responseData;
         } catch (error) {

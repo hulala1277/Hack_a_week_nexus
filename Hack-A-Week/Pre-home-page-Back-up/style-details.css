@@ -183,6 +183,16 @@ body {
     flex: 1;
 }
 
+/* Prevent long titles from overflowing their container */
+.issue-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
 .issue-status {
     background-color: #0052cc;
     color: white;
