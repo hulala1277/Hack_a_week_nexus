@@ -152,6 +152,8 @@ body {
 
 .issue_raise{
     display: block;
+    text-align: center;
+    text-decoration: none;
     background-color: #ffd700;
     color: #003d99;
     border: none;
@@ -380,6 +382,8 @@ body {
     font-weight: 600;
     font-size: 1rem;
 }
+.title_about{
+    font-size:32px;}
 
 /* Responsive Design */
 @media (max-width: 768px) {
