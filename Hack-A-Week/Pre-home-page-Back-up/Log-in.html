@@ -1,20 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
-<link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Login - JANASUNWAI 360</title>
+    <link rel="stylesheet" href="style-form.css">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .auth-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-title {
+            color: #0052cc;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .auth-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .auth-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .auth-message.success {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+            border-left: 4px solid #2ecc71;
+            display: block;
+        }
+        
+        .auth-message.error {
+            background-color: #ffebee;
+            color: #b71c1c;
+            border-left: 4px solid #ff6b6b;
+            display: block;
+        }
+        
+        .auth-button {
+            padding: 0.75rem 1.5rem;
+            background-color: #0052cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .auth-button:hover {
+            background-color: #003d99;
+        }
+        
+        .auth-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+        
+        .auth-footer a {
+            color: #0052cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0052cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Login</h1>
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
-    <button>Login</button>
-    <div class="login-footer">
-      <p>Don't have an account? <a href="#">Sign Up</a></p>
-    </div>
-  </div>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="logo.png" alt="JANASUNWAI 360" class="logo">
+                <div class="logo-text">
+                    <h2 class="main-title">JANASUNWAI 360</h2>
+                    <p class="tagline">Voice of the People</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="First-Page.html" class="nav-link" data-i18n="nav-home">Home</a>
+            </nav>
+            <div class="language-toggle">
+                <span class="lang-active">नेपाली</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-link">ENG</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <h1 class="auth-title" data-i18n="govt-login-title">Government Login</h1>
+            <p class="auth-subtitle" data-i18n="govt-login-subtitle">Sign in with your government credentials</p>
+            
+            <div id="authMessage" class="auth-message"></div>
+            
+            <form id="govtLoginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email" class="form-label" data-i18n="label-email">Email <span class="required">*</span></label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input"
+                        placeholder="your.email@govt.gov"
+                        required
+                        data-i18n-placeholder="placeholder-email"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label" data-i18n="label-password">Password <span class="required">*</span></label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input"
+                        placeholder="Enter your password"
+                        required
+                        data-i18n-placeholder="placeholder-password"
+                    >
+                </div>
+                
+                <button type="submit" class="auth-button" id="loginBtn">
+                    <span data-i18n="btn-login">Login</span>
+                </button>
+                
+                <div class="form-spinner" id="spinner"></div>
+            </form>
+            
+            <div class="auth-footer">
+                <p><span data-i18n="no-account">Don't have an account?</span> <a href="Sigh-up.html" data-i18n="link-signup">Sign Up</a></p>
+                <p style="margin-top: 1rem;"><a href="First-Page.html" data-i18n="back-home">Back to Home</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 JANASUNWAI 360. All rights reserved.</p>
+    </footer>
+
+    <script src="supabase.js"></script>
+    <script src="language.js"></script>
+    <script src="govt-auth.js"></script>
 </body>
 </html>

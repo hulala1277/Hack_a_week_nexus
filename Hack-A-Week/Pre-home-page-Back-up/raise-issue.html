@@ -10,42 +10,48 @@
     <header class="header">
         <div class="header-container">
             <div class="logo-section">
+                <img src="logo.png" alt="JANASUNWAI 360" class="logo">
                 <div class="logo-text">
                     <h2 class="main-title">JANASUNWAI 360</h2>
                     <p class="tagline">Voice of the People</p>
                 </div>
             </div>
             <nav class="nav">
-                <a href="First-Page.html" class="nav-link">Home</a>
-                <a href="raise-issue.html" class="nav-link active">Raise Issue</a>
+                <a href="First-Page.html" class="nav-link" data-i18n="nav-home">Home</a>
+                <a href="raise-issue.html" class="nav-link active" data-i18n="nav-raise-issue">Raise Issue</a>
             </nav>
+            <div class="language-toggle">
+                <span class="lang-active">नेपाली</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-link">ENG</span>
+            </div>
         </div>
     </header>
 
     <main class="container">
         <section class="form-section">
-            <h1 class="form-title">Raise Your Issue Anonymously</h1>
-            <p class="form-subtitle">Share your concerns with the government. Your identity is protected.</p>
+            <h1 class="form-title" data-i18n="form-title">Raise Your Issue Anonymously</h1>
+            <p class="form-subtitle" data-i18n="form-subtitle">Share your concerns with the government. Your identity is protected.</p>
 
             <div id="successMessage" class="message-box success-message" style="display: none;">
                 <span class="message-icon">✓</span>
                 <div>
-                    <h3>Issue Submitted Successfully!</h3>
-                    <p>Thank you for reporting. Your issue has been recorded and will be reviewed by the government.</p>
+                    <h3 data-i18n="success-title">Issue Submitted Successfully!</h3>
+                    <p data-i18n="success-msg">Thank you for reporting. Your issue has been recorded and will be reviewed by the government.</p>
                 </div>
             </div>
 
             <div id="errorMessage" class="message-box error-message" style="display: none;">
                 <span class="message-icon">✕</span>
                 <div>
-                    <h3>Error Submitting Issue</h3>
+                    <h3 data-i18n="error-title">Error Submitting Issue</h3>
                     <p id="errorText">An error occurred. Please try again.</p>
                 </div>
             </div>
 
             <form id="raiseIssueForm" class="issue-form">
                 <div class="form-group">
-                    <label for="title" class="form-label">Issue Title <span class="required">*</span></label>
+                    <label for="title" class="form-label" data-i18n="label-title">Issue Title <span class="required">*</span></label>
                     <input 
                         type="text" 
                         id="title" 
@@ -54,12 +60,13 @@
                         placeholder="e.g., Broken Roads in Downtown"
                         required
                         maxlength="150"
+                        data-i18n-placeholder="placeholder-title"
                     >
                     <small class="form-hint">Brief title of your issue (max 150 characters)</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="category" class="form-label">Category <span class="required">*</span></label>
+                    <label for="category" class="form-label" data-i18n="label-category">Category <span class="required">*</span></label>
                     <select id="category" name="category" class="form-select" required>
                         <option value="">Select a category</option>
                         <option value="Infrastructure">Infrastructure</option>
@@ -74,7 +81,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="province" class="form-label">Province <span class="required">*</span></label>
+                    <label for="province" class="form-label" data-i18n="label-province">Province <span class="required">*</span></label>
                     <input 
                         type="text" 
                         id="province" 
@@ -83,11 +90,12 @@
                         placeholder="e.g., Bagmati"
                         required
                         maxlength="100"
+                        data-i18n-placeholder="placeholder-province"
                     >
                 </div>
 
                 <div class="form-group">
-                    <label for="district" class="form-label">District <span class="required">*</span></label>
+                    <label for="district" class="form-label" data-i18n="label-district">District <span class="required">*</span></label>
                     <input 
                         type="text" 
                         id="district" 
@@ -96,11 +104,12 @@
                         placeholder="e.g., Kathmandu"
                         required
                         maxlength="100"
+                        data-i18n-placeholder="placeholder-district"
                     >
                 </div>
 
                 <div class="form-group">
-                    <label for="municipality" class="form-label">Municipality <span class="required">*</span></label>
+                    <label for="municipality" class="form-label" data-i18n="label-municipality">Municipality <span class="required">*</span></label>
                     <input 
                         type="text" 
                         id="municipality" 
@@ -109,11 +118,12 @@
                         placeholder="e.g., Kathmandu Metropolitan City"
                         required
                         maxlength="100"
+                        data-i18n-placeholder="placeholder-municipality"
                     >
                 </div>
 
                 <div class="form-group">
-                    <label for="description" class="form-label">Detailed Description <span class="required">*</span></label>
+                    <label for="description" class="form-label" data-i18n="label-description">Detailed Description <span class="required">*</span></label>
                     <textarea 
                         id="description" 
                         name="description" 
@@ -122,12 +132,13 @@
                         required
                         rows="6"
                         maxlength="2000"
+                        data-i18n-placeholder="placeholder-description"
                     ></textarea>
                     <small class="form-hint"><span id="charCount">0</span>/2000 characters</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="impact" class="form-label">Impact Level</label>
+                    <label for="impact" class="form-label" data-i18n="label-impact">Impact Level</label>
                     <select id="impact" name="impact" class="form-select">
                         <option value="">Select impact level (optional)</option>
                         <option value="Low">Low (Affects a few people)</option>
@@ -138,7 +149,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="attachments" class="form-label">Attachments (Optional)</label>
+                    <label for="attachments" class="form-label" data-i18n="label-attachments">Attachments (Optional)</label>
                     <input 
                         type="file" 
                         id="attachments" 
@@ -150,7 +161,6 @@
                     <small class="form-hint">Add photos or documents to support your issue (max 5MB total)</small>
                 </div>
 
-                <!-- Consent -->
                 <div class="form-group checkbox-group">
                     <label class="checkbox-label">
                         <input 
@@ -160,33 +170,31 @@
                             class="form-checkbox"
                             required
                         >
-                        <span>I confirm that the information provided is true and accurate. <span class="required">*</span></span>
+                        <span data-i18n="label-consent">I confirm that the information provided is true and accurate. <span class="required">*</span></span>
                     </label>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="form-actions">
                     <button type="submit" class="submit-button" id="submitBtn">
-                        <span>Submit Issue Anonymously</span>
+                        <span data-i18n="btn-submit">Submit Issue Anonymously</span>
                     </button>
-                    <a href="First-Page.html" class="cancel-button">Cancel</a>
+                    <a href="First-Page.html" class="cancel-button" data-i18n="btn-cancel">Cancel</a>
                 </div>
             </form>
 
-            <!-- Privacy Notice -->
             <div class="privacy-notice">
-                <h3>🔒 Your Privacy is Protected</h3>
-                <p>Your submission is completely anonymous. We do not collect or store any personal information. Your identity will never be revealed to government officials or the public.</p>
+                <h3 data-i18n="privacy-title">🔒 Your Privacy is Protected</h3>
+                <p data-i18n="privacy-msg">Your submission is completely anonymous. We do not collect or store any personal information. Your identity will never be revealed to government officials or the public.</p>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2026 JANASUNWAI 360. All rights reserved. Your voice matters.</p>
     </footer>
 
     <script src="supabase.js"></script>
+    <script src="language.js"></script>
     <script src="raise-issue.js"></script>
 </body>
 </html>
